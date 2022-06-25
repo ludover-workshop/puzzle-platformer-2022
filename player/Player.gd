@@ -7,6 +7,8 @@ export(float) var move_acceleration: float = 400
 export(float) var gravity: float = 400
 export(float) var jump_speed: float = 250
 
+var key_in_pocket = false
+
 var movement_direction = Vector2.ZERO
 
 func _physics_process(delta):
@@ -25,5 +27,20 @@ func _physics_process(delta):
 	velocity.x = move_toward(velocity.x,  movement_direction.x * max_move_speed, move_acceleration * delta)
 	
 	velocity = velocity + Vector2.DOWN * gravity * delta
-		
-	velocity = move_and_slide(velocity, Vector2.UP)
+
+	velocity = move_and_slide_with_snap(velocity, Vector2.DOWN, Vector2.UP)
+
+func pickup_coin():
+	print("pickup coin")
+	
+func pickup_key():
+	key_in_pocket = true
+	print("pickup key")
+
+func high_jump():
+	velocity.y = -jump_speed * 1.3
+
+func damage_control():
+	get_tree().reload_current_scene()
+	print("Death!")
+
