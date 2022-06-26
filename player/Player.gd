@@ -33,6 +33,9 @@ func _physics_process(delta):
 func pickup_coin():
 	print("pickup coin")
 	
+func has_key():
+	return key_in_pocket	
+
 func pickup_key():
 	key_in_pocket = true
 	print("pickup key")
@@ -41,6 +44,7 @@ func high_jump():
 	velocity.y = -jump_speed * 1.3
 
 func damage_control():
-	get_tree().reload_current_scene()
 	print("Death!")
+	get_tree().reload_current_scene()
+
 
