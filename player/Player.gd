@@ -17,7 +17,7 @@ onready var was_on_floor = is_on_floor()
 
 var just_jumped = false
 
-const JumpLandScene = preload("res://player/JumpLandParticles.tscn")
+const JumpLandScene = preload("res://fx/JumpLandParticles.tscn")
 
 func _physics_process(delta):
 	movement_direction = Vector2.ZERO
@@ -44,10 +44,7 @@ func _physics_process(delta):
 
 func spawn_jump_land_particles():
 	if $GroundParticlesRay.is_colliding():
-		var particles = JumpLandScene.instance()
-		particles.position = position
-		particles.position.y += 10
-		get_parent().add_child(particles)
+		Fx.spawn(JumpLandScene, self, Vector2(0, 10))
 
 func update_animation_tree():
 	$WalkingParticles.emitting = false

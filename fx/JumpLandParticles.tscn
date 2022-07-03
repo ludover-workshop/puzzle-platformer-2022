@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://player/particle.png" type="Texture" id=1]
-[ext_resource path="res://player/JumpLandParticles.gd" type="Script" id=2]
+[ext_resource path="res://fx/OneShotParticle.gd" type="Script" id=1]
+[ext_resource path="res://player/particle.png" type="Texture" id=2]
 
 [sub_resource type="Curve" id=41]
 min_value = -360.0
@@ -51,5 +51,5 @@ one_shot = true
 explosiveness = 0.8
 local_coords = false
 process_material = SubResource( 47 )
-texture = ExtResource( 1 )
-script = ExtResource( 2 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )

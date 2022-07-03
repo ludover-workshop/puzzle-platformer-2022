@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Object",
+"class": "Fx",
+"language": "GDScript",
+"path": "res://fx/Fx.gd"
+} ]
+_global_script_class_icons={
+"Fx": ""
+}
+
 [application]
 
 config/name="Puzzle-platformer"
