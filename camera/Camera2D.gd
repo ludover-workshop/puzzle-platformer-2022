@@ -1,8 +1,6 @@
 extends Camera2D
 
-export(NodePath) var player_path = @"../Player"
-
-onready var player = get_node(player_path)
+onready var player = get_tree().get_nodes_in_group("Player")[0]
 
 func _process(delta):
 	position = player.position

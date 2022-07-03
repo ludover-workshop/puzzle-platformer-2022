@@ -7,11 +7,3 @@ func _process(delta):
 		flip_h = false
 	if player.movement_direction == Vector2.LEFT:
 		flip_h = true
-	
-	if player.is_on_floor():
-		if abs(player.velocity.x) > 10:
-			play("walk")
-		else:
-			play("idle")
-	else:
-		play("jump")
