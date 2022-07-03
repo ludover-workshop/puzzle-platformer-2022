@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://player/particle.png" type="Texture" id=1]
+[ext_resource path="res://player/JumpLandParticles.gd" type="Script" id=2]
+
+[sub_resource type="Curve" id=41]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0, 159.018 ), 0.0, 0.0, 0, 0, Vector2( 1, 360 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=42]
+width = 512
+curve = SubResource( 41 )
+
+[sub_resource type="Gradient" id=43]
+colors = PoolColorArray( 1, 1, 1, 1, 0.624262, 0.624262, 0.624262, 0.243137 )
+
+[sub_resource type="GradientTexture" id=44]
+gradient = SubResource( 43 )
+width = 512
+
+[sub_resource type="Curve" id=45]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.334356 ), -2.63642, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=46]
+width = 512
+curve = SubResource( 45 )
+
+[sub_resource type="ParticlesMaterial" id=47]
+emission_shape = 2
+emission_box_extents = Vector3( 10, 0, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 90.0
+gravity = Vector3( 0, -20, 0 )
+initial_velocity = 15.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 120.0
+angle_random = 1.0
+angle_curve = SubResource( 42 )
+scale = 0.4
+scale_random = 0.5
+scale_curve = SubResource( 46 )
+color_ramp = SubResource( 44 )
+
+[node name="JumpLandParticles" type="Particles2D"]
+emitting = false
+amount = 10
+one_shot = true
+explosiveness = 0.8
+local_coords = false
+process_material = SubResource( 47 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )

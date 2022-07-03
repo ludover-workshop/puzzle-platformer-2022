@@ -17,6 +17,8 @@ onready var was_on_floor = is_on_floor()
 
 var just_jumped = false
 
+const JumpLandScene = preload("res://player/JumpLandParticles.tscn")
+
 func _physics_process(delta):
 	movement_direction = Vector2.ZERO
 	
@@ -40,16 +42,26 @@ func _physics_process(delta):
 
 	update_animation_tree()
 
+func spawn_jump_land_particles():
+	if $GroundParticlesRay.is_colliding():
+		var particles = JumpLandScene.instance()
+		particles.position = position
+		particles.position.y += 10
+		get_parent().add_child(particles)
+
 func update_animation_tree():
+	$WalkingParticles.emitting = false
 	if(just_jumped):
 		state_machine.travel("JumpStart")
-	elif was_on_floor && is_on_floor():
-		if abs(velocity.x) > 10 || movement_direction != Vector2.ZERO:
+	elif was_on_floor && is_on_floor() && $GroundParticlesRay.is_colliding():
+		if abs(velocity.x) > 5 || movement_direction != Vector2.ZERO:
+			$WalkingParticles.emitting = true
 			state_machine.travel("Walking")
 		else:
 			state_machine.travel("Idle")
 	elif !was_on_floor && is_on_floor():
 		state_machine.travel("JumpLand")
+		spawn_jump_land_particles()
 	elif was_on_floor && !is_on_floor():
 		state_machine.travel("JumpAir")
 		
