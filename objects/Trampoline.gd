@@ -21,3 +21,4 @@ func _on_Area2D_body_entered(body):
 		$AnimatedSprite.frame = 0
 		$AnimatedSprite.play()
 		body.high_jump()
+		$HighJump.play()

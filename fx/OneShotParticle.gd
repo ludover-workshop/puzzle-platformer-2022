@@ -7,3 +7,6 @@ func _ready():
 func process():
 	if !emitting:
 		queue_free()
+
+func play_sound(name: String):
+	get_node(name).play()

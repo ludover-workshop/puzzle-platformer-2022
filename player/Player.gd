@@ -7,6 +7,9 @@ export(float) var move_acceleration: float = 500
 export(float) var gravity: float = 600
 export(float) var jump_speed: float = 250
 
+signal death
+signal pick_up_key
+
 var key_in_pocket = false
 
 var movement_direction = Vector2.ZERO
@@ -73,6 +76,7 @@ func has_key():
 
 func pickup_key():
 	key_in_pocket = true
+	emit_signal("pick_up_key")
 	print("pickup key")
 
 func high_jump():
@@ -80,7 +84,7 @@ func high_jump():
 	just_jumped = true
 
 func damage_control():
-	print("Death!")
-	get_tree().reload_current_scene()
+	emit_signal("death")
+	
 
 

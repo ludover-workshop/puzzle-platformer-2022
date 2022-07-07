@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/HoliznaCC0 - Complications.mp3-5546860a1ab489874ab2a1f946a8abd4.mp3str"
+
+[deps]
+
+source_file="res://sounds/HoliznaCC0 - Complications.mp3"
+dest_files=[ "res://.import/HoliznaCC0 - Complications.mp3-5546860a1ab489874ab2a1f946a8abd4.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
