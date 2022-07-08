@@ -53,9 +53,10 @@ func update_animation_tree():
 	$WalkingParticles.emitting = false
 	if(just_jumped):
 		state_machine.travel("JumpStart")
-	elif was_on_floor && is_on_floor() && $GroundParticlesRay.is_colliding():
+	elif was_on_floor && is_on_floor():
 		if abs(velocity.x) > 5 || movement_direction != Vector2.ZERO:
-			$WalkingParticles.emitting = true
+			if $GroundParticlesRay.is_colliding():
+				$WalkingParticles.emitting = true
 			state_machine.travel("Walking")
 		else:
 			state_machine.travel("Idle")
