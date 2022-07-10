@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://player/player_sprite.png" type="Texture" id=1]
 [ext_resource path="res://player/Player.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://sounds/land.wav" type="AudioStream" id=7]
 [ext_resource path="res://sounds/RandomPitchOnPlay.gd" type="Script" id=8]
 [ext_resource path="res://sounds/jump.wav" type="AudioStream" id=9]
+[ext_resource path="res://player/WallJumpRay.gd" type="Script" id=10]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -404,7 +405,7 @@ __meta__ = {
 
 [node name="PlayerSprites" type="AnimatedSprite" parent="."]
 position = Vector2( 0, 10 )
-scale = Vector2( 1, 1.04298 )
+scale = Vector2( 1, 1.04492 )
 frames = SubResource( 2 )
 animation = "idle"
 playing = true
@@ -448,3 +449,15 @@ stream = ExtResource( 7 )
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
+
+[node name="WallJumpRay" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 10, 0 )
+collision_mask = 2
+script = ExtResource( 10 )
+
+[node name="CanMoveTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="CanMoveTimer" to="." method="_on_CanMoveTimer_timeout"]

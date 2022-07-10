@@ -6,6 +6,10 @@ export(float) var max_move_speed: float = 100
 export(float) var move_acceleration: float = 500
 export(float) var gravity: float = 600
 export(float) var jump_speed: float = 250
+export(int) var max_extra_jumps: int = 0
+export(int) var enable_wall_jump: bool = true
+export(int) var wall_jump_force: int = 200
+
 
 signal death
 signal pick_up_key
@@ -13,27 +17,47 @@ signal pick_up_key
 var key_in_pocket = false
 
 var movement_direction = Vector2.ZERO
+var can_move = true
 
 onready var state_machine = $AnimationTree.get("parameters/playback")
 
 onready var was_on_floor = is_on_floor()
+onready var wall_jump_ray =$WallJumpRay
 
 var just_jumped = false
+
+var extra_jumps = max_extra_jumps
 
 const JumpLandScene = preload("res://fx/JumpLandParticles.tscn")
 
 func _physics_process(delta):
 	movement_direction = Vector2.ZERO
 	
-	if Input.is_action_pressed("move_right"):
+	if can_move and Input.is_action_pressed("move_right"):
 		movement_direction = Vector2.RIGHT
-	if Input.is_action_pressed("move_left"):
+	if can_move and Input.is_action_pressed("move_left"):
 		movement_direction = Vector2.LEFT
-		
-		
-	if Input.is_action_just_pressed("jump") && is_on_floor():
+
+	var can_wall_jump = wall_jump_ray.is_colliding()
+	var can_jump = is_on_floor() or extra_jumps > 0 or can_wall_jump 
+	if Input.is_action_just_pressed("jump") && can_jump:
 		velocity.y = -jump_speed
 		just_jumped = true
+		
+		if not is_on_floor():
+			if can_wall_jump:
+				# wall jump
+				if wall_jump_ray.cast_to.x > 0:
+					velocity.x -= wall_jump_force
+					var scene = Fx.spawn(JumpLandScene, self, Vector2(10, 10))
+					scene.rotation_degrees = 120
+				else:
+					var scene = Fx.spawn(JumpLandScene, self, Vector2(-10, 10))
+					scene.rotation_degrees = -120
+					velocity.x += wall_jump_force	
+			else:
+				# extra jump
+				extra_jumps -= 1
 		
 	#velocity.x = clamp(velocity.x + movement_direction.x * move_acceleration * delta, -max_move_speed, max_move_speed)
 	
@@ -63,6 +87,7 @@ func update_animation_tree():
 	elif !was_on_floor && is_on_floor():
 		state_machine.travel("JumpLand")
 		spawn_jump_land_particles()
+		extra_jumps = max_extra_jumps
 	elif was_on_floor && !is_on_floor():
 		state_machine.travel("JumpAir")
 		
@@ -86,6 +111,6 @@ func high_jump():
 
 func damage_control():
 	emit_signal("death")
-	
 
-
+func _on_CanMoveTimer_timeout():
+	can_move = true
