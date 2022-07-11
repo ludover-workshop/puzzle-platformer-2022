@@ -405,7 +405,7 @@ __meta__ = {
 
 [node name="PlayerSprites" type="AnimatedSprite" parent="."]
 position = Vector2( 0, 10 )
-scale = Vector2( 1, 1.04492 )
+scale = Vector2( 1, 0.953045 )
 frames = SubResource( 2 )
 animation = "idle"
 playing = true
@@ -456,8 +456,16 @@ cast_to = Vector2( 10, 0 )
 collision_mask = 2
 script = ExtResource( 10 )
 
-[node name="CanMoveTimer" type="Timer" parent="."]
-wait_time = 0.5
+[node name="InteractRay" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 10, 0 )
+collision_mask = 8
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource( 10 )
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.2
 one_shot = true
 
-[connection signal="timeout" from="CanMoveTimer" to="." method="_on_CanMoveTimer_timeout"]
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_CoyoteTimer_timeout"]
