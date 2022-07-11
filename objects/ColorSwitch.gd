@@ -11,9 +11,9 @@ func _ready():
 	$AnimatedSprite.animation = color
 	
 	if is_on:
-		switch_on()
+		switch_on(false)
 	else:
-		switch_off()
+		switch_off(false)
 
 func interact():
 	if is_on:
@@ -21,12 +21,14 @@ func interact():
 	else:
 		switch_on()
 
-func switch_on():
+func switch_on(emit=true):
 	$AnimatedSprite.frame = 1
-	emit_signal("switched_on")
+	if emit:
+		emit_signal("switched_on")
 	is_on = true
 	
-func switch_off():
+func switch_off(emit=true):
 	$AnimatedSprite.frame = 0
-	emit_signal("switched_off")
+	if emit:
+		emit_signal("switched_off")
 	is_on = false

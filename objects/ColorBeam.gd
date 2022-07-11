@@ -1,12 +1,17 @@
 extends StaticBody2D
 
+func _ready():
+	$AnimationPlayerGlow.play("glow")
+
 func set_color(color):
 	$AnimatedSprite.animation = color
 	
 func disable():
 	$CollisionShape2D.disabled = true
-	visible = false
+	$AnimationPlayer.play("disable")
+	#visible = false
 	
 func enable():
 	$CollisionShape2D.disabled = false
-	visible = true
+	$AnimationPlayer.play("enable")
+	#visible = true

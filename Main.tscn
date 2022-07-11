@@ -32,7 +32,8 @@ script = ExtResource( 5 )
 [node name="Level1" parent="." instance=ExtResource( 2 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 54, 155 )
+position = Vector2( 1247, 88 )
+enable_wall_jump = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )

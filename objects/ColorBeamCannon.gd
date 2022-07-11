@@ -17,8 +17,8 @@ var beams = []
 func _ready():
 
 	switch_node = get_node(switch_path)
-	switch_node.connect(switch_signal_on, self, "turn_on")
-	switch_node.connect(switch_signal_off, self, "turn_off")
+	switch_node.connect(switch_signal_on, self, "toggle")
+	switch_node.connect(switch_signal_off, self, "toggle")
 
 	$CannonSprite.animation = orientation
 	
@@ -50,17 +50,14 @@ func _ready():
 		beam.rotation_degrees = beam_rotation
 		beam.set_color(switch_node.color)
 		
-	if is_on:
-		turn_on()
-	else:
-		turn_off()
+	is_on = not is_on
+	toggle()
 
-func turn_on():
+func toggle():
 	for beam in beams:
-		beam.enable()
-	
-func turn_off():
-	for beam in beams:
-		beam.disable()
+		if is_on:
+			beam.disable()
+		else:
+			beam.enable()
+	is_on = not is_on
 
-	
