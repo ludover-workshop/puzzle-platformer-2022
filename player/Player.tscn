@@ -401,6 +401,8 @@ color_ramp = SubResource( 42 )
 polygon = PoolVector2Array( 2, 10, 6, 10, 8, 5, 8, -7, 4, -12, -3, -12, -7, -8, -7, 1, -6, 10 )
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
+collision_layer = 17
+collision_mask = 33
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
@@ -408,7 +410,7 @@ __meta__ = {
 
 [node name="PlayerSprites" type="AnimatedSprite" parent="."]
 position = Vector2( 0, 10 )
-scale = Vector2( 1, 1.01041 )
+scale = Vector2( 1, 1.01621 )
 frames = SubResource( 2 )
 animation = "idle"
 playing = true
