@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://objects/ColorSwitch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tilemaps/Ground.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://objects/LockedDoor.tscn" type="PackedScene" id=13]
 [ext_resource path="res://objects/Torch.tscn" type="PackedScene" id=14]
 [ext_resource path="res://enemies/Gunner.tscn" type="PackedScene" id=15]
+[ext_resource path="res://objects/Checkpoint.tscn" type="PackedScene" id=16]
 
 [node name="Level1" type="Node2D"]
 
@@ -257,8 +258,14 @@ switch_path = NodePath("../YellowColorSwitch")
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.627451, 0.627451, 0.627451, 1 )
 
+[node name="Checkpoint" parent="." instance=ExtResource( 16 )]
+position = Vector2( 846, 137 )
+
+[node name="Checkpoint2" parent="." instance=ExtResource( 16 )]
+position = Vector2( 1253, 95 )
+
 [node name="Gunner" parent="." instance=ExtResource( 15 )]
-position = Vector2( 1608, -78 )
+position = Vector2( 1630, -78 )
 scale = Vector2( -1, 1 )
 
 [connection signal="keylock_opened" from="KeyLock" to="LockedDoor" method="open"]

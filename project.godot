@@ -23,6 +23,10 @@ _global_script_class_icons={
 config/name="Puzzle-platformer"
 run/main_scene="res://Main.tscn"
 
+[autoload]
+
+Globals="*res://Globals.gd"
+
 [display]
 
 window/size/width=320
