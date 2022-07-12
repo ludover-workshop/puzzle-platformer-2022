@@ -25,7 +25,7 @@ run/main_scene="res://Main.tscn"
 
 [autoload]
 
-Globals="*res://Globals.gd"
+Global="*res://Global.gd"
 
 [display]
 
