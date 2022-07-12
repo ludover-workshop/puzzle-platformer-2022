@@ -9,3 +9,7 @@ func _on_Bullet_body_entered(body):
 	if body.is_in_group("Player"):
 		body.damage_control()
 	queue_free()
+
+
+func _on_DestroyTimer_timeout():
+	queue_free()
