@@ -16,6 +16,7 @@ func _ready():
 		switch_off(false)
 
 func interact():
+	$AudioStreamPlayer.play()
 	if is_on:
 		switch_off()
 	else:

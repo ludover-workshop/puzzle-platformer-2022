@@ -1,3 +1,4 @@
 extends Node
 
-var checkpoint = null
+var checkpoint_position = null
+var max_extra_jumps = 0

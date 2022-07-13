@@ -34,6 +34,10 @@ var extra_jumps = max_extra_jumps
 
 const JumpLandScene = preload("res://fx/JumpLandParticles.tscn")
 
+func _ready():
+	if Global.max_extra_jumps > 0:
+		max_extra_jumps = Global.max_extra_jumps
+
 func _physics_process(delta):
 	movement_direction = Vector2.ZERO
 	
@@ -131,3 +135,7 @@ func damage_control():
 
 func _on_CoyoteTimer_timeout():
 	is_coyote_time = false
+	
+func enable_double_jump():
+	max_extra_jumps = 1
+	Global.max_extra_jumps = 1
